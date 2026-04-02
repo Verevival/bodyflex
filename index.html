@@ -141,16 +141,20 @@
       box-shadow: 0 0 40px rgba(0,212,170,0.3), 0 8px 20px rgba(0,0,0,0.4);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
+
     .btn-hero:hover {
       transform: translateY(-3px);
       box-shadow: 0 0 60px rgba(0,212,170,0.5), 0 12px 30px rgba(0,0,0,0.4);
     }
+
     .btn-hero svg { transition: transform 0.2s; }
     .btn-hero:hover svg { transform: translateY(3px); }
 
     /* ====== SECTIONS ====== */
     section { padding: 6rem 1.5rem; }
+
     .container { max-width: 1160px; margin: 0 auto; }
+
     .sec-label {
       font-size: 0.75rem;
       letter-spacing: 0.28em;
@@ -158,6 +162,7 @@
       color: var(--primary);
       margin-bottom: 0.8rem;
     }
+
     .sec-title {
       font-size: clamp(2rem, 4vw, 3rem);
       font-weight: 800;
@@ -165,14 +170,17 @@
       margin-bottom: 1.2rem;
       line-height: 1.15;
     }
+
     .sec-desc {
       font-size: 1.05rem;
       color: var(--muted);
       max-width: 580px;
       line-height: 1.7;
     }
+
     /* ====== CYCLE SECTION ====== */
     #cycle { background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%); }
+
     .cycle-timeline {
       display: flex;
       align-items: stretch;
@@ -181,100 +189,1121 @@
       overflow-x: auto;
       padding-bottom: 1rem;
     }
+
     .cycle-timeline::-webkit-scrollbar { height: 4px; }
     .cycle-timeline::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 2px; }
     .cycle-timeline::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 2px; }
+
     .phase-item {
       flex: 1;
       min-width: 170px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      background: var(--card);
-      border-radius: 1rem;
-      padding: 2rem 1rem;
-      gap: 1rem;
-      border: 1px solid var(--border);
+      position: relative;
     }
-    .phase-item .phase-number {
+
+    .phase-item + .phase-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 60px;
+      height: 2px;
+      width: 50%;
+      background: linear-gradient(90deg, transparent, var(--border));
+      transform: translateX(-50%);
+    }
+
+    .phase-connector {
+      position: absolute;
+      top: 60px;
+      left: 50%;
+      right: -50%;
+      height: 2px;
+      background: var(--border);
+    }
+
+    .phase-circle-wrap {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      margin-bottom: 1rem;
+    }
+
+    .phase-svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .phase-info {
+      text-align: center;
+      padding: 0 0.5rem;
+    }
+
+    .phase-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .phase-time-badge {
+      display: inline-block;
+      padding: 0.2rem 0.7rem;
+      border-radius: 1rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      background: rgba(255,255,255,0.07);
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+
+    .phase-hint {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ====== TRAINER ====== */
+    #trainer { background: var(--bg); }
+
+    .trainer-card {
+      max-width: 680px;
+      margin: 4rem auto 0;
+      background: var(--card);
+      border-radius: 2rem;
+      padding: 3rem 2.5rem;
+      border: 1px solid var(--border);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .trainer-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(0,212,170,0.04) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .trainer-phase-dots {
+      display: flex;
+      gap: 0.4rem;
+      justify-content: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .tdot {
+      height: 5px;
+      border-radius: 3px;
+      background: rgba(255,255,255,0.1);
+      transition: all 0.4s ease;
+      width: 28px;
+    }
+
+    .tdot.active {
+      width: 44px;
+    }
+
+    .trainer-vis {
+      width: 180px;
+      height: 180px;
+      margin: 0 auto 2rem;
+    }
+
+    .t-phase-name {
       font-size: 2rem;
       font-weight: 800;
-      color: var(--primary);
-    }
-    .phase-item .phase-title {
-      font-size: 1.3rem;
-      font-weight: 700;
       text-align: center;
+      margin-bottom: 0.5rem;
+      transition: color 0.4s;
     }
-    .phase-item .phase-desc {
+
+    .t-instruction {
       font-size: 0.95rem;
       color: var(--muted);
       text-align: center;
+      min-height: 3rem;
+      margin-bottom: 2rem;
+      line-height: 1.5;
     }
-    .phase-item .phase-img {
-      width: 80px;
-      height: 80px;
-      margin-top: 0.5rem;
+
+    .t-timer {
+      font-size: 5rem;
+      font-weight: 900;
+      text-align: center;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.05em;
+      line-height: 1;
+      margin-bottom: 1.5rem;
+      transition: color 0.4s;
     }
+
+    .t-bar-wrap {
+      background: rgba(255,255,255,0.07);
+      border-radius: 4px;
+      height: 5px;
+      overflow: hidden;
+      margin-bottom: 1rem;
+    }
+
+    .t-bar {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 1s linear, background-color 0.5s;
+    }
+
+    .t-cycle-info {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+
+    .trainer-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .tbtn {
+      padding: 0.9rem 2.2rem;
+      border-radius: 4rem;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.15s, opacity 0.15s;
+    }
+
+    .tbtn:hover { transform: scale(1.04); }
+    .tbtn:active { transform: scale(0.97); }
+
+    .tbtn-start {
+      background: linear-gradient(135deg, var(--primary), var(--blue));
+      color: #050d1a;
+      min-width: 170px;
+    }
+
+    .tbtn-reset {
+      background: rgba(255,255,255,0.06);
+      color: var(--muted);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* ====== BENEFITS ====== */
+    #benefits { background: var(--bg2); }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 4rem;
+    }
+
+    .bcard {
+      background: var(--card);
+      border-radius: 1.5rem;
+      padding: 2rem;
+      border: 1px solid var(--border);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .bcard:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    }
+
+    .bcard-icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.2rem;
+      font-size: 1.5rem;
+    }
+
+    .bcard-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+
+    .bcard-text {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ====== CTA ====== */
+    .cta-section {
+      background: var(--bg);
+      text-align: center;
+      padding: 6rem 1.5rem;
+    }
+
+    .cta-inner {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
     /* ====== FOOTER ====== */
-    footer { background: var(--bg2); color: var(--muted); text-align: center; padding: 2rem 1rem; }
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    /* ====== SCROLL REVEAL ====== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ====== RESPONSIVE ====== */
+    @media (max-width: 600px) {
+      .hero-stats { gap: 2rem; }
+      .trainer-card { padding: 2rem 1.5rem; }
+      .t-timer { font-size: 4rem; }
+      .t-phase-name { font-size: 1.5rem; }
+    }
   </style>
 </head>
 <body>
-  <section class="hero">
-    <div class="hero-rings">
-      <div class="ring"></div>
-      <div class="ring"></div>
-      <div class="ring"></div>
-    </div>
-    <span class="hero-badge">Бодифлекс</span>
-    <h1>Дыхательная гимнастика для тела и ума</h1>
-    <p class="hero-tagline">Укрепляй лёгкие, повышай выносливость и получай удовольствие от дыхания.</p>
-    <div class="hero-stats">
-      <div>
-        <div class="stat-val">10+</div>
-        <div class="stat-lbl">уроков</div>
-      </div>
-      <div>
-        <div class="stat-val">5м</div>
-        <div class="stat-lbl">минут за раз</div>
-      </div>
-      <div>
-        <div class="stat-val">365</div>
-        <div class="stat-lbl">дней в году</div>
-      </div>
-    </div>
-    <a href="#cycle" class="btn-hero">Начать практику <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-  </section>
 
-  <section id="cycle" class="container">
-    <div class="sec-label">Этапы</div>
-    <h2 class="sec-title">Циклическая программа</h2>
-    <p class="sec-desc">Последовательность упражнений, повторяемая каждый день.</p>
-    <div class="cycle-timeline">
+<!-- =================== HERO =================== -->
+<section class="hero">
+  <div class="hero-rings">
+    <div class="ring"></div>
+    <div class="ring"></div>
+    <div class="ring"></div>
+  </div>
+
+  <div class="hero-badge">Авторская методика · Грир Чайлдерс</div>
+
+  <h1>БОДИФЛЕКС</h1>
+
+  <p class="hero-tagline">
+    Дыхательная гимнастика, которая сжигает жир и улучшает тело всего за&nbsp;5–7 минут в день
+  </p>
+
+  <div class="hero-stats">
+    <div>
+      <div class="stat-val">7</div>
+      <div class="stat-lbl">минут в день</div>
+    </div>
+    <div>
+      <div class="stat-val">40″</div>
+      <div class="stat-lbl">один цикл</div>
+    </div>
+    <div>
+      <div class="stat-val">5</div>
+      <div class="stat-lbl">фаз дыхания</div>
+    </div>
+  </div>
+
+  <a href="#trainer" class="btn-hero">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/>
+    </svg>
+    Начать тренировку
+  </a>
+</section>
+
+<!-- =================== BREATHING CYCLE =================== -->
+<section id="cycle">
+  <div class="container">
+    <div class="reveal">
+      <div class="sec-label">Техника дыхания</div>
+      <h2 class="sec-title">Один цикл — 40 секунд</h2>
+      <p class="sec-desc">
+        Каждый цикл состоит из 5&nbsp;строго последовательных фаз. Правильное дыхание — это 80% результата. Изучите каждый этап перед началом.
+      </p>
+    </div>
+
+    <div class="cycle-timeline reveal">
+
+      <!-- PHASE 1: Exhale -->
       <div class="phase-item">
-        <div class="phase-number">1</div>
-        <div class="phase-title">Вдох</div>
-        <div class="phase-desc">Глубокий вдох через нос, 4 секунды.</div>
-        <img src="https://via.placeholder.com/80" alt="Вдох" class="phase-img" />
+        <div class="phase-circle-wrap">
+          <svg class="phase-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+            <!-- Background ring -->
+            <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(78,205,196,0.12)" stroke-width="1"/>
+            <!-- Lungs body -->
+            <g>
+              <!-- Left lung -->
+              <ellipse cx="43" cy="66" rx="22" ry="30" fill="rgba(78,205,196,0.15)" stroke="#4ecdc4" stroke-width="1.5">
+                <animate attributeName="ry" values="30;10;30" dur="3s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1"/>
+                <animate attributeName="fill" values="rgba(78,205,196,0.15);rgba(78,205,196,0.04);rgba(78,205,196,0.15)" dur="3s" repeatCount="indefinite"/>
+              </ellipse>
+              <!-- Right lung -->
+              <ellipse cx="77" cy="66" rx="22" ry="30" fill="rgba(78,205,196,0.15)" stroke="#4ecdc4" stroke-width="1.5">
+                <animate attributeName="ry" values="30;10;30" dur="3s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1"/>
+                <animate attributeName="fill" values="rgba(78,205,196,0.15);rgba(78,205,196,0.04);rgba(78,205,196,0.15)" dur="3s" repeatCount="indefinite"/>
+              </ellipse>
+              <!-- Trachea -->
+              <rect x="57" y="28" width="6" height="20" rx="3" fill="#4ecdc4" opacity="0.7"/>
+              <!-- Mouth indicator -->
+              <circle cx="60" cy="22" r="6" fill="rgba(78,205,196,0.2)" stroke="#4ecdc4" stroke-width="1.5"/>
+            </g>
+            <!-- Air arrows going OUT -->
+            <g stroke="#4ecdc4" stroke-width="1.5" fill="none">
+              <line x1="60" y1="14" x2="60" y2="4">
+                <animate attributeName="opacity" values="0;1;0" dur="1.5s" repeatCount="indefinite"/>
+              </line>
+              <polyline points="56,8 60,3 64,8">
+                <animate attributeName="opacity" values="0;1;0" dur="1.5s" repeatCount="indefinite"/>
+              </polyline>
+            </g>
+            <g stroke="#4ecdc4" stroke-width="1.5" fill="none" opacity="0.6">
+              <line x1="48" y1="15" x2="44" y2="6">
+                <animate attributeName="opacity" values="0;0.7;0" dur="1.5s" begin="0.3s" repeatCount="indefinite"/>
+              </line>
+              <polyline points="41,10 44,5 49,8">
+                <animate attributeName="opacity" values="0;0.7;0" dur="1.5s" begin="0.3s" repeatCount="indefinite"/>
+              </polyline>
+            </g>
+            <g stroke="#4ecdc4" stroke-width="1.5" fill="none" opacity="0.6">
+              <line x1="72" y1="15" x2="76" y2="6">
+                <animate attributeName="opacity" values="0;0.7;0" dur="1.5s" begin="0.6s" repeatCount="indefinite"/>
+              </line>
+              <polyline points="71,8 76,5 79,10">
+                <animate attributeName="opacity" values="0;0.7;0" dur="1.5s" begin="0.6s" repeatCount="indefinite"/>
+              </polyline>
+            </g>
+          </svg>
+        </div>
+        <div class="phase-info">
+          <div class="phase-name" style="color:#4ecdc4">Выдох</div>
+          <div class="phase-time-badge">3 сек</div>
+          <div class="phase-hint">Медленно выдохните весь воздух через рот до конца</div>
+        </div>
       </div>
+
+      <!-- PHASE 2: Deep Inhale -->
       <div class="phase-item">
-        <div class="phase-number">2</div>
-        <div class="phase-title">Задержка</div>
-        <div class="phase-desc">Задержка дыхания, 2 секунды.</div>
-        <img src="https://via.placeholder.com/80" alt="Задержка" class="phase-img" />
+        <div class="phase-circle-wrap">
+          <svg class="phase-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(59,158,255,0.12)" stroke-width="1"/>
+            <!-- Expanding lungs -->
+            <ellipse cx="43" cy="66" rx="22" ry="30" fill="rgba(59,158,255,0.12)" stroke="#3b9eff" stroke-width="1.5">
+              <animate attributeName="ry" values="12;30;12" dur="3s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1"/>
+              <animate attributeName="rx" values="18;22;18" dur="3s" repeatCount="indefinite"/>
+              <animate attributeName="fill" values="rgba(59,158,255,0.04);rgba(59,158,255,0.18);rgba(59,158,255,0.04)" dur="3s" repeatCount="indefinite"/>
+            </ellipse>
+            <ellipse cx="77" cy="66" rx="22" ry="30" fill="rgba(59,158,255,0.12)" stroke="#3b9eff" stroke-width="1.5">
+              <animate attributeName="ry" values="12;30;12" dur="3s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1"/>
+              <animate attributeName="rx" values="18;22;18" dur="3s" repeatCount="indefinite"/>
+              <animate attributeName="fill" values="rgba(59,158,255,0.04);rgba(59,158,255,0.18);rgba(59,158,255,0.04)" dur="3s" repeatCount="indefinite"/>
+            </ellipse>
+            <rect x="57" y="28" width="6" height="20" rx="3" fill="#3b9eff" opacity="0.7"/>
+            <circle cx="60" cy="22" r="6" fill="rgba(59,158,255,0.2)" stroke="#3b9eff" stroke-width="1.5"/>
+            <!-- Arrows coming IN -->
+            <g stroke="#3b9eff" stroke-width="1.5" fill="none">
+              <line x1="60" y1="4" x2="60" y2="14">
+                <animate attributeName="opacity" values="0;1;0" dur="1.5s" repeatCount="indefinite"/>
+              </line>
+              <polyline points="56,11 60,16 64,11">
+                <animate attributeName="opacity" values="0;1;0" dur="1.5s" repeatCount="indefinite"/>
+              </polyline>
+            </g>
+            <g stroke="#3b9eff" stroke-width="1.5" fill="none">
+              <line x1="44" y1="6" x2="48" y2="15">
+                <animate attributeName="opacity" values="0;0.7;0" dur="1.5s" begin="0.3s" repeatCount="indefinite"/>
+              </line>
+              <polyline points="45,12 48,16 52,12">
+                <animate attributeName="opacity" values="0;0.7;0" dur="1.5s" begin="0.3s" repeatCount="indefinite"/>
+              </polyline>
+            </g>
+            <g stroke="#3b9eff" stroke-width="1.5" fill="none">
+              <line x1="76" y1="6" x2="72" y2="15">
+                <animate attributeName="opacity" values="0;0.7;0" dur="1.5s" begin="0.6s" repeatCount="indefinite"/>
+              </line>
+              <polyline points="68,12 72,16 75,12">
+                <animate attributeName="opacity" values="0;0.7;0" dur="1.5s" begin="0.6s" repeatCount="indefinite"/>
+              </polyline>
+            </g>
+          </svg>
+        </div>
+        <div class="phase-info">
+          <div class="phase-name" style="color:#3b9eff">Глубокий вдох</div>
+          <div class="phase-time-badge">3 сек</div>
+          <div class="phase-hint">Наполните лёгкие через рот — как воздушный шар</div>
+        </div>
       </div>
+
+      <!-- PHASE 3: Sharp Exhale -->
       <div class="phase-item">
-        <div class="phase-number">3</div>
-        <div class="phase-title">Выдох</div>
-        <div class="phase-desc">Медленный выдох через рот, 6 секунд.</div>
-        <img src="https://via.placeholder.com/80" alt="Выдох" class="phase-img" />
+        <div class="phase-circle-wrap">
+          <svg class="phase-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,94,94,0.15)" stroke-width="1"/>
+            <!-- Lungs rapidly deflating -->
+            <ellipse cx="43" cy="66" rx="22" ry="30" fill="rgba(255,94,94,0.12)" stroke="#ff5e5e" stroke-width="1.5">
+              <animate attributeName="ry" values="28;6;28" dur="0.8s" repeatCount="indefinite" calcMode="spline" keySplines="0.7 0 1 1; 0.0 0 0.3 1"/>
+              <animate attributeName="fill" values="rgba(255,94,94,0.15);rgba(255,94,94,0.04);rgba(255,94,94,0.15)" dur="0.8s" repeatCount="indefinite"/>
+            </ellipse>
+            <ellipse cx="77" cy="66" rx="22" ry="30" fill="rgba(255,94,94,0.12)" stroke="#ff5e5e" stroke-width="1.5">
+              <animate attributeName="ry" values="28;6;28" dur="0.8s" repeatCount="indefinite" calcMode="spline" keySplines="0.7 0 1 1; 0.0 0 0.3 1"/>
+              <animate attributeName="fill" values="rgba(255,94,94,0.15);rgba(255,94,94,0.04);rgba(255,94,94,0.15)" dur="0.8s" repeatCount="indefinite"/>
+            </ellipse>
+            <rect x="57" y="28" width="6" height="20" rx="3" fill="#ff5e5e" opacity="0.7"/>
+            <circle cx="60" cy="22" r="6" fill="rgba(255,94,94,0.2)" stroke="#ff5e5e" stroke-width="1.5"/>
+            <!-- Burst arrows -->
+            <g stroke="#ff5e5e" stroke-width="2" fill="none">
+              <line x1="60" y1="14" x2="60" y2="2">
+                <animate attributeName="opacity" values="0;1;0" dur="0.4s" repeatCount="indefinite"/>
+              </line>
+              <polyline points="55,6 60,1 65,6">
+                <animate attributeName="opacity" values="0;1;0" dur="0.4s" repeatCount="indefinite"/>
+              </polyline>
+            </g>
+            <g stroke="#ff5e5e" stroke-width="1.5" fill="none">
+              <line x1="42" y1="14" x2="32" y2="4">
+                <animate attributeName="opacity" values="0;0.8;0" dur="0.4s" begin="0.1s" repeatCount="indefinite"/>
+              </line>
+              <polyline points="30,10 31,3 38,6">
+                <animate attributeName="opacity" values="0;0.8;0" dur="0.4s" begin="0.1s" repeatCount="indefinite"/>
+              </polyline>
+            </g>
+            <g stroke="#ff5e5e" stroke-width="1.5" fill="none">
+              <line x1="78" y1="14" x2="88" y2="4">
+                <animate attributeName="opacity" values="0;0.8;0" dur="0.4s" begin="0.2s" repeatCount="indefinite"/>
+              </line>
+              <polyline points="82,6 89,3 90,10">
+                <animate attributeName="opacity" values="0;0.8;0" dur="0.4s" begin="0.2s" repeatCount="indefinite"/>
+              </polyline>
+            </g>
+            <!-- Burst ring -->
+            <circle cx="60" cy="22" r="12" fill="none" stroke="#ff5e5e" stroke-width="1">
+              <animate attributeName="r" values="6;22;6" dur="0.8s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="1;0;1" dur="0.8s" repeatCount="indefinite"/>
+            </circle>
+          </svg>
+        </div>
+        <div class="phase-info">
+          <div class="phase-name" style="color:#ff5e5e">Резкий выдох</div>
+          <div class="phase-time-badge">3 сек</div>
+          <div class="phase-hint">Резко выдохните через рот — «пффф», щёки не раздувать</div>
+        </div>
+      </div>
+
+      <!-- PHASE 4: Breath Hold + Vacuum -->
+      <div class="phase-item">
+        <div class="phase-circle-wrap">
+          <svg class="phase-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(155,93,229,0.15)" stroke-width="1"/>
+            <!-- Body silhouette -->
+            <!-- Torso outline -->
+            <path d="M 42 35 C 36 35, 28 42, 28 52 L 28 95 C 28 100, 32 104, 38 104 L 82 104 C 88 104, 92 100, 92 95 L 92 52 C 92 42, 84 35, 78 35 Z"
+                  fill="rgba(155,93,229,0.08)" stroke="#9b5de5" stroke-width="1.5"/>
+            <!-- Rib cage area (upper) -->
+            <path d="M 38 35 C 38 35, 42 55, 60 55 C 78 55, 82 35, 82 35" fill="rgba(155,93,229,0.1)" stroke="none"/>
+            <!-- Stomach being sucked in -->
+            <path d="M 32 65 C 38 65, 45 62, 60 60 C 75 62, 82 65, 88 65" fill="none" stroke="rgba(155,93,229,0.4)" stroke-width="1" stroke-dasharray="3,2">
+              <animate attributeName="d"
+                values="M 32 65 C 38 65, 45 62, 60 60 C 75 62, 82 65, 88 65;
+                        M 32 65 C 38 65, 48 58, 60 55 C 72 58, 82 65, 88 65;
+                        M 32 65 C 38 65, 45 62, 60 60 C 75 62, 82 65, 88 65"
+                dur="2s" repeatCount="indefinite"/>
+            </path>
+            <!-- Vacuum belly concave shape -->
+            <path d="M 32 72 Q 60 88, 88 72" fill="none" stroke="#9b5de5" stroke-width="2">
+              <animate attributeName="d"
+                values="M 32 72 Q 60 88, 88 72;
+                        M 32 72 Q 60 60, 88 72;
+                        M 32 72 Q 60 88, 88 72"
+                dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1"/>
+            </path>
+            <!-- Diaphragm rising -->
+            <path d="M 38 58 Q 60 50, 82 58" fill="none" stroke="rgba(155,93,229,0.6)" stroke-width="1.5">
+              <animate attributeName="d"
+                values="M 38 58 Q 60 55, 82 58; M 38 52 Q 60 46, 82 52; M 38 58 Q 60 55, 82 58"
+                dur="2s" repeatCount="indefinite"/>
+            </path>
+            <!-- Hold indicator ring -->
+            <circle cx="60" cy="60" r="50" fill="none" stroke="#9b5de5" stroke-width="2" stroke-dasharray="314" stroke-dashoffset="314" opacity="0.5">
+              <animate attributeName="stroke-dashoffset" values="314;0;314" dur="9s" repeatCount="indefinite"/>
+            </circle>
+            <!-- Breath hold X indicator -->
+            <text x="60" y="20" text-anchor="middle" font-size="9" fill="#9b5de5" opacity="0.8" font-family="sans-serif">НЕ ДЫШАТЬ</text>
+          </svg>
+        </div>
+        <div class="phase-info">
+          <div class="phase-name" style="color:#9b5de5">Задержка + Вакуум</div>
+          <div class="phase-time-badge">8–10 сек</div>
+          <div class="phase-hint">Не дышите, втяните живот максимально под рёбра</div>
+        </div>
+      </div>
+
+      <!-- PHASE 5: Release + Exercise -->
+      <div class="phase-item">
+        <div class="phase-circle-wrap">
+          <svg class="phase-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(0,201,167,0.12)" stroke-width="1"/>
+            <!-- Nose breathing -->
+            <!-- Head/nose schematic -->
+            <ellipse cx="60" cy="30" rx="16" ry="18" fill="rgba(0,201,167,0.1)" stroke="#00c9a7" stroke-width="1.5"/>
+            <!-- Nose -->
+            <path d="M 55 33 Q 60 40, 65 33" fill="none" stroke="#00c9a7" stroke-width="1.5"/>
+            <!-- Nostril dots -->
+            <circle cx="57" cy="35" r="2" fill="rgba(0,201,167,0.4)"/>
+            <circle cx="63" cy="35" r="2" fill="rgba(0,201,167,0.4)"/>
+            <!-- Gentle breath arrows going in through nose -->
+            <g stroke="#00c9a7" stroke-width="1.5" fill="none">
+              <line x1="57" y1="10" x2="57" y2="32">
+                <animate attributeName="opacity" values="0;0.8;0" dur="2.5s" repeatCount="indefinite"/>
+              </line>
+              <polyline points="53,28 57,33 61,28">
+                <animate attributeName="opacity" values="0;0.8;0" dur="2.5s" repeatCount="indefinite"/>
+              </polyline>
+            </g>
+            <g stroke="#00c9a7" stroke-width="1.5" fill="none">
+              <line x1="63" y1="10" x2="63" y2="32">
+                <animate attributeName="opacity" values="0;0.8;0" dur="2.5s" begin="0.5s" repeatCount="indefinite"/>
+              </line>
+              <polyline points="59,28 63,33 67,28">
+                <animate attributeName="opacity" values="0;0.8;0" dur="2.5s" begin="0.5s" repeatCount="indefinite"/>
+              </polyline>
+            </g>
+            <!-- Body exercise position hint -->
+            <text x="60" y="70" text-anchor="middle" font-size="8" fill="rgba(0,201,167,0.7)" font-family="sans-serif">ВДОХ ЧЕРЕЗ НОС</text>
+            <!-- Relaxed waves -->
+            <path d="M 25 85 Q 40 80, 55 85 Q 70 90, 85 85 Q 95 82, 100 85" fill="none" stroke="rgba(0,201,167,0.3)" stroke-width="1.5">
+              <animate attributeName="d"
+                values="M 25 85 Q 40 80, 55 85 Q 70 90, 85 85;
+                        M 25 85 Q 40 90, 55 85 Q 70 80, 85 85;
+                        M 25 85 Q 40 80, 55 85 Q 70 90, 85 85"
+                dur="3s" repeatCount="indefinite"/>
+            </path>
+            <path d="M 20 95 Q 38 88, 60 95 Q 82 102, 100 95" fill="none" stroke="rgba(0,201,167,0.2)" stroke-width="1.5">
+              <animate attributeName="d"
+                values="M 20 95 Q 38 88, 60 95 Q 82 102, 100 95;
+                        M 20 95 Q 38 102, 60 95 Q 82 88, 100 95;
+                        M 20 95 Q 38 88, 60 95 Q 82 102, 100 95"
+                dur="3s" begin="0.5s" repeatCount="indefinite"/>
+            </path>
+          </svg>
+        </div>
+        <div class="phase-info">
+          <div class="phase-name" style="color:#00c9a7">Вдох через нос</div>
+          <div class="phase-time-badge">~22 сек</div>
+          <div class="phase-hint">Вдохните через нос, удерживайте позу упражнения</div>
+        </div>
+      </div>
+
+    </div><!-- end cycle-timeline -->
+
+    <!-- Cycle flow diagram -->
+    <div class="reveal" style="margin-top:3rem; background:var(--card); border-radius:1.5rem; padding:2rem; border:1px solid var(--border); text-align:center;">
+      <div style="font-size:0.8rem; color:var(--muted); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:1rem;">Полный цикл · 40 секунд</div>
+      <div style="display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:0.5rem; font-size:0.85rem;">
+        <span style="padding:0.4rem 1rem; background:rgba(78,205,196,0.15); border-radius:2rem; color:#4ecdc4">Выдох 3″</span>
+        <span style="color:var(--muted)">→</span>
+        <span style="padding:0.4rem 1rem; background:rgba(59,158,255,0.15); border-radius:2rem; color:#3b9eff">Вдох 3″</span>
+        <span style="color:var(--muted)">→</span>
+        <span style="padding:0.4rem 1rem; background:rgba(255,94,94,0.15); border-radius:2rem; color:#ff5e5e">Резкий выдох 3″</span>
+        <span style="color:var(--muted)">→</span>
+        <span style="padding:0.4rem 1rem; background:rgba(155,93,229,0.15); border-radius:2rem; color:#9b5de5">Вакуум 9″</span>
+        <span style="color:var(--muted)">→</span>
+        <span style="padding:0.4rem 1rem; background:rgba(0,201,167,0.15); border-radius:2rem; color:#00c9a7">Упражнение 22″</span>
       </div>
     </div>
-  </section>
 
-  <footer>
-    © 2026 Бодифлекс. Все права защищены.
-  </footer>
+  </div>
+</section>
+
+<!-- =================== TRAINER =================== -->
+<section id="trainer">
+  <div class="container">
+    <div class="reveal" style="text-align:center;">
+      <div class="sec-label">Интерактивный тренер</div>
+      <h2 class="sec-title">Тренируйтесь прямо сейчас</h2>
+      <p class="sec-desc" style="margin:0 auto;">
+        Следуйте инструкциям тренера. Система будет вести вас через каждую фазу дыхания с точным отсчётом времени.
+      </p>
+    </div>
+
+    <div class="trainer-card reveal">
+
+      <div class="trainer-phase-dots" id="phaseDots">
+        <div class="tdot active" id="dot0"></div>
+        <div class="tdot" id="dot1"></div>
+        <div class="tdot" id="dot2"></div>
+        <div class="tdot" id="dot3"></div>
+        <div class="tdot" id="dot4"></div>
+      </div>
+
+      <div class="trainer-vis" id="trainerVis">
+        <!-- SVG injected by JS -->
+      </div>
+
+      <div class="t-phase-name" id="tPhaseName">Готовы?</div>
+      <div class="t-instruction" id="tInstruction">
+        Встаньте прямо, ноги на ширине плеч. Нажмите «Старт» когда будете готовы.
+      </div>
+
+      <div class="t-timer" id="tTimer">—</div>
+
+      <div class="t-bar-wrap">
+        <div class="t-bar" id="tBar" style="width:100%;background-color:var(--primary)"></div>
+      </div>
+
+      <div class="t-cycle-info" id="tCycleInfo">Цикл 0 из 10 · 0:00 из 6:40</div>
+
+      <div class="trainer-btns">
+        <button class="tbtn tbtn-start" id="btnStart" onclick="toggleTrainer()">▶ Старт</button>
+        <button class="tbtn tbtn-reset" id="btnReset" onclick="resetTrainer()">↺ Сброс</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =================== BENEFITS =================== -->
+<section id="benefits">
+  <div class="container">
+    <div class="reveal">
+      <div class="sec-label">Почему это работает</div>
+      <h2 class="sec-title">Эффект бодифлекс</h2>
+      <p class="sec-desc">Уникальное сочетание аэробного дыхания, стретчинга и силовых поз ускоряет метаболизм и укрепляет тело.</p>
+    </div>
+
+    <div class="benefits-grid">
+      <div class="bcard reveal">
+        <div class="bcard-icon" style="background:rgba(0,212,170,0.1)">🔥</div>
+        <div class="bcard-title">Сжигание жира</div>
+        <div class="bcard-text">Аэробное дыхание насыщает клетки кислородом, запуская активное сжигание жиров — особенно в проблемных зонах.</div>
+      </div>
+      <div class="bcard reveal">
+        <div class="bcard-icon" style="background:rgba(59,158,255,0.1)">⚡</div>
+        <div class="bcard-title">7 минут достаточно</div>
+        <div class="bcard-text">Всего 10 циклов по 40 секунд заменяют полноценную кардио-тренировку. Идеально для занятых людей.</div>
+      </div>
+      <div class="bcard reveal">
+        <div class="bcard-icon" style="background:rgba(155,93,229,0.1)">🫁</div>
+        <div class="bcard-title">Диафрагмальное дыхание</div>
+        <div class="bcard-text">Вакуум живота массирует внутренние органы, улучшает пищеварение и укрепляет поперечную мышцу живота.</div>
+      </div>
+      <div class="bcard reveal">
+        <div class="bcard-icon" style="background:rgba(255,156,58,0.1)">📏</div>
+        <div class="bcard-title">Уменьшение талии</div>
+        <div class="bcard-text">Упражнения-вакуум активно воздействуют на поперечную мышцу живота — естественный корсет тела.</div>
+      </div>
+      <div class="bcard reveal">
+        <div class="bcard-icon" style="background:rgba(0,201,167,0.1)">🧘</div>
+        <div class="bcard-title">Гибкость и тонус</div>
+        <div class="bcard-text">Позы растяжки в сочетании с задержкой дыхания углубляют стретчинг и быстрее улучшают гибкость.</div>
+      </div>
+      <div class="bcard reveal">
+        <div class="bcard-icon" style="background:rgba(78,205,196,0.1)">🏡</div>
+        <div class="bcard-title">Дома без оборудования</div>
+        <div class="bcard-text">Никаких тренажёров, абонементов и особой одежды. Только ваше тело и 7 минут утреннего времени.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== CTA =================== -->
+<div class="cta-section">
+  <div class="cta-inner">
+    <div class="sec-label" style="text-align:center">Начните сегодня</div>
+    <h2 class="sec-title" style="margin-bottom:1rem">Первый результат уже через 2 недели</h2>
+    <p style="color:var(--muted);margin-bottom:2.5rem;font-size:1rem">
+      Грир Чайлдерс разработала бодифлекс в 1970-х и за 10 лет ежедневных занятий кардинально изменила своё тело. Методика доступна каждому.
+    </p>
+    <a href="#trainer" class="btn-hero">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/>
+      </svg>
+      Начать тренировку
+    </a>
+  </div>
+</div>
+
+<!-- =================== FOOTER =================== -->
+<footer>
+  <div>Бодифлекс · Дыхательная гимнастика по методике Грир Чайлдерс</div>
+  <div style="margin-top:0.4rem;font-size:0.78rem;opacity:0.5">Проконсультируйтесь с врачом перед началом любой программы физических упражнений</div>
+</footer>
+
+
+<script>
+// =================== PHASE DATA ===================
+const PHASES = [
+  {
+    key: 'exhale',
+    name: 'Выдох',
+    duration: 3,
+    color: '#4ecdc4',
+    instruction: 'Медленно выдохните весь воздух через рот до конца',
+    svgFn: () => buildLungSVG('#4ecdc4', 'out', 'slow')
+  },
+  {
+    key: 'inhale',
+    name: 'Глубокий вдох',
+    duration: 3,
+    color: '#3b9eff',
+    instruction: 'Глубоко вдохните через рот — наполните лёгкие полностью',
+    svgFn: () => buildLungSVG('#3b9eff', 'in', 'slow')
+  },
+  {
+    key: 'sharp',
+    name: 'Резкий выдох',
+    duration: 3,
+    color: '#ff5e5e',
+    instruction: 'Резко и полностью выдохните через рот — «пффф!»',
+    svgFn: () => buildLungSVG('#ff5e5e', 'out', 'fast')
+  },
+  {
+    key: 'hold',
+    name: 'Задержка · Вакуум',
+    duration: 9,
+    color: '#9b5de5',
+    instruction: 'Не дышите! Втяните живот максимально под рёбра',
+    svgFn: () => buildVacuumSVG()
+  },
+  {
+    key: 'release',
+    name: 'Вдох через нос',
+    duration: 22,
+    color: '#00c9a7',
+    instruction: 'Вдохните через нос, удерживайте позу упражнения',
+    svgFn: () => buildNoseSVG()
+  }
+];
+
+const TOTAL_CYCLES = 10;
+const CYCLE_DURATION = PHASES.reduce((s, p) => s + p.duration, 0); // 40s
+const TOTAL_SECONDS = TOTAL_CYCLES * CYCLE_DURATION; // 400s
+
+let timerInterval = null;
+let isRunning = false;
+let elapsedSeconds = 0;
+
+// =================== SVG BUILDERS ===================
+function buildLungSVG(color, dir, speed) {
+  const dur = speed === 'fast' ? '0.7s' : '2.5s';
+  const inVals = dir === 'in' ? '10;34;10' : '34;10;34';
+  const fillIn = dir === 'in' ? `rgba(${hexToRgb(color)},0.04);rgba(${hexToRgb(color)},0.18);rgba(${hexToRgb(color)},0.04)` : `rgba(${hexToRgb(color)},0.18);rgba(${hexToRgb(color)},0.04);rgba(${hexToRgb(color)},0.18)`;
+  const arrowDir = dir === 'in' ? `
+    <line x1="60" y1="10" x2="60" y2="28"><animate attributeName="opacity" values="0;1;0" dur="${dur}" repeatCount="indefinite"/></line>
+    <polyline points="54,24 60,30 66,24"><animate attributeName="opacity" values="0;1;0" dur="${dur}" repeatCount="indefinite"/></polyline>
+  ` : `
+    <line x1="60" y1="28" x2="60" y2="10"><animate attributeName="opacity" values="0;1;0" dur="${dur}" repeatCount="indefinite"/></line>
+    <polyline points="54,14 60,8 66,14"><animate attributeName="opacity" values="0;1;0" dur="${dur}" repeatCount="indefinite"/></polyline>
+  `;
+  return `<svg width="180" height="180" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="60" cy="60" r="55" fill="none" stroke="${color}" stroke-width="0.5" opacity="0.3"/>
+    <ellipse cx="40" cy="72" rx="22" ry="34" fill="rgba(${hexToRgb(color)},0.1)" stroke="${color}" stroke-width="2">
+      <animate attributeName="ry" values="${inVals}" dur="${dur}" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+      <animate attributeName="fill" values="${fillIn}" dur="${dur}" repeatCount="indefinite"/>
+    </ellipse>
+    <ellipse cx="80" cy="72" rx="22" ry="34" fill="rgba(${hexToRgb(color)},0.1)" stroke="${color}" stroke-width="2">
+      <animate attributeName="ry" values="${inVals}" dur="${dur}" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+      <animate attributeName="fill" values="${fillIn}" dur="${dur}" repeatCount="indefinite"/>
+    </ellipse>
+    <rect x="57" y="30" width="6" height="22" rx="3" fill="${color}" opacity="0.8"/>
+    <circle cx="60" cy="24" r="8" fill="rgba(${hexToRgb(color)},0.15)" stroke="${color}" stroke-width="2"/>
+    <g stroke="${color}" stroke-width="2" fill="none">${arrowDir}</g>
+  </svg>`;
+}
+
+function buildVacuumSVG() {
+  const c = '#9b5de5';
+  return `<svg width="180" height="180" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="60" cy="60" r="55" fill="none" stroke="${c}" stroke-width="0.5" opacity="0.3"/>
+    <!-- Countdown ring -->
+    <circle cx="60" cy="60" r="50" fill="none" stroke="${c}" stroke-width="3" stroke-dasharray="314" stroke-dashoffset="314" opacity="0.6" stroke-linecap="round" transform="rotate(-90 60 60)">
+      <animate attributeName="stroke-dashoffset" values="314;0" dur="9s" fill="freeze" id="vacuumRing"/>
+    </circle>
+    <!-- Torso -->
+    <path d="M 38 35 C 30 38, 24 46, 24 58 L 24 95 C 24 102 29 107 36 107 L 84 107 C 91 107 96 102 96 95 L 96 58 C 96 46 90 38 82 35 Z"
+      fill="rgba(155,93,229,0.07)" stroke="${c}" stroke-width="1.5"/>
+    <!-- Shoulder line -->
+    <path d="M 38 35 Q 60 30 82 35" fill="none" stroke="${c}" stroke-width="1.5" opacity="0.5"/>
+    <!-- Ribs hint -->
+    <path d="M 35 55 Q 60 50 85 55" fill="none" stroke="rgba(155,93,229,0.3)" stroke-width="1"/>
+    <path d="M 33 62 Q 60 57 87 62" fill="none" stroke="rgba(155,93,229,0.3)" stroke-width="1"/>
+    <!-- Belly vacuum animation -->
+    <path d="M 28 78 Q 60 95 92 78" fill="none" stroke="${c}" stroke-width="2.5">
+      <animate attributeName="d"
+        values="M 28 78 Q 60 95 92 78;
+                M 28 78 Q 60 60 92 78;
+                M 28 78 Q 60 60 92 78"
+        dur="1.5s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    </path>
+    <!-- No breath X -->
+    <text x="60" y="22" text-anchor="middle" font-size="10" fill="${c}" opacity="0.9" font-family="system-ui,sans-serif" font-weight="700">НЕ ДЫШАТЬ</text>
+    <!-- Upward arrows for diaphragm -->
+    <g stroke="${c}" stroke-width="1.5" fill="none" opacity="0.6">
+      <line x1="60" y1="68" x2="60" y2="54"><animate attributeName="opacity" values="0;0.8;0" dur="1s" repeatCount="indefinite"/></line>
+      <polyline points="55,58 60,52 65,58"><animate attributeName="opacity" values="0;0.8;0" dur="1s" repeatCount="indefinite"/></polyline>
+    </g>
+  </svg>`;
+}
+
+function buildNoseSVG() {
+  const c = '#00c9a7';
+  return `<svg width="180" height="180" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="60" cy="60" r="55" fill="none" stroke="${c}" stroke-width="0.5" opacity="0.3"/>
+    <!-- Pulsing circle -->
+    <circle cx="60" cy="60" r="45" fill="rgba(0,201,167,0.05)">
+      <animate attributeName="r" values="40;50;40" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.3;0.08;0.3" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <!-- Head -->
+    <ellipse cx="60" cy="42" rx="22" ry="26" fill="rgba(0,201,167,0.1)" stroke="${c}" stroke-width="1.8"/>
+    <!-- Face features -->
+    <circle cx="52" cy="38" r="3" fill="rgba(0,201,167,0.3)"/>
+    <circle cx="68" cy="38" r="3" fill="rgba(0,201,167,0.3)"/>
+    <path d="M 52 50 Q 60 56 68 50" fill="none" stroke="${c}" stroke-width="1.5" opacity="0.6"/>
+    <!-- Nose -->
+    <path d="M 56 44 Q 60 52 64 44" fill="none" stroke="${c}" stroke-width="2"/>
+    <!-- Nostril dots -->
+    <circle cx="57.5" cy="47" r="2.5" fill="rgba(0,201,167,0.5)"/>
+    <circle cx="62.5" cy="47" r="2.5" fill="rgba(0,201,167,0.5)"/>
+    <!-- Breath in arrows from above -->
+    <g stroke="${c}" stroke-width="1.8" fill="none">
+      <line x1="58" y1="5" x2="58" y2="28">
+        <animate attributeName="opacity" values="0;1;0" dur="2.5s" repeatCount="indefinite"/>
+      </line>
+      <polyline points="53,24 58,30 63,24">
+        <animate attributeName="opacity" values="0;1;0" dur="2.5s" repeatCount="indefinite"/>
+      </polyline>
+    </g>
+    <g stroke="${c}" stroke-width="1.4" fill="none" opacity="0.6">
+      <line x1="46" y1="10" x2="50" y2="28">
+        <animate attributeName="opacity" values="0;0.6;0" dur="2.5s" begin="0.5s" repeatCount="indefinite"/>
+      </line>
+      <g stroke="${c}" stroke-width="1.4" fill="none">
+        <polyline points="46,24 50,30 54,24">
+          <animate attributeName="opacity" values="0;0.6;0" dur="2.5s" begin="0.5s" repeatCount="indefinite"/>
+        </polyline>
+      </g>
+    </g>
+    <g stroke="${c}" stroke-width="1.4" fill="none">
+      <line x1="74" y1="10" x2="70" y2="28">
+        <animate attributeName="opacity" values="0;0.6;0" dur="2.5s" begin="1s" repeatCount="indefinite"/>
+      </line>
+      <polyline points="66,24 70,30 74,24">
+        <animate attributeName="opacity" values="0;0.6;0" dur="2.5s" begin="1s" repeatCount="indefinite"/>
+      </polyline>
+    </g>
+    <!-- Rest text -->
+    <text x="60" y="102" text-anchor="middle" font-size="8" fill="${c}" opacity="0.7" font-family="system-ui,sans-serif">УДЕРЖИВАТЬ ПОЗУ</text>
+    <!-- Relaxed wave -->
+    <path d="M 20 112 Q 40 106 60 112 Q 80 118 100 112" fill="none" stroke="rgba(0,201,167,0.25)" stroke-width="1.5">
+      <animate attributeName="d" values="M 20 112 Q 40 106 60 112 Q 80 118 100 112;M 20 112 Q 40 118 60 112 Q 80 106 100 112;M 20 112 Q 40 106 60 112 Q 80 118 100 112" dur="3s" repeatCount="indefinite"/>
+    </path>
+  </svg>`;
+}
+
+function buildIdleSVG() {
+  return `<svg width="180" height="180" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="60" cy="60" r="55" fill="none" stroke="rgba(0,212,170,0.15)" stroke-width="1">
+      <animate attributeName="r" values="45;55;45" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.5;0.15;0.5" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="60" cy="60" r="35" fill="rgba(0,212,170,0.05)">
+      <animate attributeName="r" values="28;38;28" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <text x="60" y="55" text-anchor="middle" font-size="28" font-family="system-ui,sans-serif">🌬️</text>
+    <text x="60" y="78" text-anchor="middle" font-size="10" fill="rgba(0,212,170,0.6)" font-family="system-ui,sans-serif">ГОТОВЫ?</text>
+  </svg>`;
+}
+
+function hexToRgb(hex) {
+  const r = parseInt(hex.slice(1,3),16);
+  const g = parseInt(hex.slice(3,5),16);
+  const b = parseInt(hex.slice(5,7),16);
+  return `${r},${g},${b}`;
+}
+
+// =================== TRAINER LOGIC ===================
+function getCurrentPhase(elapsed) {
+  const cyclePos = elapsed % CYCLE_DURATION;
+  let acc = 0;
+  for (let i = 0; i < PHASES.length; i++) {
+    acc += PHASES[i].duration;
+    if (cyclePos < acc) {
+      const timeInPhase = cyclePos - (acc - PHASES[i].duration);
+      return { phaseIndex: i, timeInPhase, remaining: PHASES[i].duration - timeInPhase };
+    }
+  }
+  return { phaseIndex: 0, timeInPhase: 0, remaining: PHASES[0].duration };
+}
+
+function formatTime(seconds) {
+  const m = Math.floor(seconds / 60);
+  const s = seconds % 60;
+  return `${m}:${String(s).padStart(2,'0')}`;
+}
+
+let lastPhaseIndex = -1;
+let lastVacuumStart = -1;
+
+function updateUI() {
+  if (elapsedSeconds >= TOTAL_SECONDS) {
+    finishTrainer();
+    return;
+  }
+
+  const cycleNum = Math.floor(elapsedSeconds / CYCLE_DURATION) + 1;
+  const { phaseIndex, remaining } = getCurrentPhase(elapsedSeconds);
+  const phase = PHASES[phaseIndex];
+
+  // Update phase name & color
+  const phaseName = document.getElementById('tPhaseName');
+  phaseName.textContent = phase.name;
+  phaseName.style.color = phase.color;
+
+  // Update instruction
+  document.getElementById('tInstruction').textContent = phase.instruction;
+
+  // Update timer
+  const timerEl = document.getElementById('tTimer');
+  timerEl.textContent = Math.ceil(remaining);
+  timerEl.style.color = phase.color;
+
+  // Update progress bar
+  const progress = (phase.duration - remaining) / phase.duration * 100;
+  const bar = document.getElementById('tBar');
+  bar.style.width = progress + '%';
+  bar.style.backgroundColor = phase.color;
+
+  // Update cycle info
+  document.getElementById('tCycleInfo').textContent =
+    `Цикл ${Math.min(cycleNum, TOTAL_CYCLES)} из ${TOTAL_CYCLES} · ${formatTime(elapsedSeconds)} из ${formatTime(TOTAL_SECONDS)}`;
+
+  // Update phase dots
+  for (let i = 0; i < PHASES.length; i++) {
+    const dot = document.getElementById(`dot${i}`);
+    dot.style.background = i === phaseIndex ? phase.color : 'rgba(255,255,255,0.1)';
+    dot.className = 'tdot' + (i === phaseIndex ? ' active' : '');
+  }
+
+  // Update visual only on phase change
+  if (phaseIndex !== lastPhaseIndex) {
+    lastPhaseIndex = phaseIndex;
+    document.getElementById('trainerVis').innerHTML = phase.svgFn();
+    // Restart vacuum ring animation
+    if (phaseIndex === 3) {
+      setTimeout(() => {
+        const ring = document.querySelector('#vacuumRing');
+        if (ring) {
+          ring.beginElement && ring.beginElement();
+        }
+      }, 50);
+    }
+  }
+}
+
+function toggleTrainer() {
+  if (elapsedSeconds >= TOTAL_SECONDS) {
+    resetTrainer();
+    return;
+  }
+  if (isRunning) {
+    pauseTrainer();
+  } else {
+    startTrainer();
+  }
+}
+
+function startTrainer() {
+  isRunning = true;
+  document.getElementById('btnStart').textContent = '⏸ Пауза';
+
+  timerInterval = setInterval(() => {
+    elapsedSeconds++;
+    updateUI();
+    if (elapsedSeconds >= TOTAL_SECONDS) {
+      clearInterval(timerInterval);
+    }
+  }, 1000);
+
+  updateUI();
+}
+
+function pauseTrainer() {
+  isRunning = false;
+  clearInterval(timerInterval);
+  document.getElementById('btnStart').textContent = '▶ Продолжить';
+}
+
+function resetTrainer() {
+  isRunning = false;
+  clearInterval(timerInterval);
+  elapsedSeconds = 0;
+  lastPhaseIndex = -1;
+
+  document.getElementById('btnStart').textContent = '▶ Старт';
+  document.getElementById('tPhaseName').textContent = 'Готовы?';
+  document.getElementById('tPhaseName').style.color = 'var(--text)';
+  document.getElementById('tInstruction').textContent = 'Встаньте прямо, ноги на ширине плеч. Нажмите «Старт» когда будете готовы.';
+  document.getElementById('tTimer').textContent = '—';
+  document.getElementById('tTimer').style.color = 'var(--text)';
+  document.getElementById('tBar').style.width = '100%';
+  document.getElementById('tBar').style.backgroundColor = 'var(--primary)';
+  document.getElementById('tCycleInfo').textContent = `Цикл 0 из ${TOTAL_CYCLES} · 0:00 из ${formatTime(TOTAL_SECONDS)}`;
+  document.getElementById('trainerVis').innerHTML = buildIdleSVG();
+
+  for (let i = 0; i < PHASES.length; i++) {
+    const dot = document.getElementById(`dot${i}`);
+    dot.style.background = 'rgba(255,255,255,0.1)';
+    dot.className = 'tdot' + (i === 0 ? ' active' : '');
+  }
+  document.getElementById('dot0').style.background = 'var(--primary)';
+}
+
+function finishTrainer() {
+  isRunning = false;
+  clearInterval(timerInterval);
+
+  document.getElementById('tPhaseName').textContent = 'Отличная работа! 🎉';
+  document.getElementById('tPhaseName').style.color = 'var(--primary)';
+  document.getElementById('tInstruction').textContent = 'Вы завершили полную тренировку бодифлекс! 10 циклов · 6 минут 40 секунд';
+  document.getElementById('tTimer').textContent = '✓';
+  document.getElementById('tTimer').style.color = 'var(--primary)';
+  document.getElementById('tBar').style.width = '100%';
+  document.getElementById('tBar').style.backgroundColor = 'var(--primary)';
+  document.getElementById('btnStart').textContent = '↺ Ещё раз';
+  document.getElementById('trainerVis').innerHTML = `
+    <svg width="180" height="180" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="rgba(0,212,170,0.08)" stroke="rgba(0,212,170,0.4)" stroke-width="2">
+        <animate attributeName="r" values="46;54;46" dur="3s" repeatCount="indefinite"/>
+      </circle>
+      <text x="60" y="50" text-anchor="middle" font-size="32">🏆</text>
+      <text x="60" y="72" text-anchor="middle" font-size="11" fill="#00d4aa" font-family="system-ui,sans-serif" font-weight="700">ТРЕНИРОВКА</text>
+      <text x="60" y="86" text-anchor="middle" font-size="11" fill="#00d4aa" font-family="system-ui,sans-serif" font-weight="700">ЗАВЕРШЕНА</text>
+    </svg>`;
+}
+
+// =================== SCROLL REVEAL ===================
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// =================== INIT ===================
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('trainerVis').innerHTML = buildIdleSVG();
+});
+</script>
 </body>
 </html>
